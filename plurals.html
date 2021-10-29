@@ -1,27 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-   
+
     <h3>What word would you like pluralized?</h3>
-    <input type="text" id="input" size="15" placeholder = "Enter text here">
+    <input type="text" id="input" size="15" placeholder="Enter text here">
     <br>
     <br>
-    <button type="button" id="button1" class="button" onclick = "pluralize()">Pluralize</button>
+    <button type="button" id="button1" class="button" onclick="makePlural()">Pluralize</button>
     <br>
     <br>
     <textarea id="output" rows="1"></textarea>
     <p id="result"></p>
-   
-<script>
-//write your code here...
 
-</script>
+    <script>
+        
+        
+
+        function makePlural(input) {
+            input = document.getElementById("input").value
+            lastChar = input.substr(input.length - 1, 1)
+            last2Char = input.substr(input.length - 2, 2)
+            last3Char = input.substr(input.length - 3, 3)
+            output = ""
+            switch (lastChar) {
+                case "x":
+                case "s":
+                case "z":
+                    append(0)
+                    break;
+                case "h":
+
+                    switch (last2Char) {
+                        case "sh":
+                        case "ch":
+                            append(0)
+                            break;
+                        default:
+                            break;
+
+                    }
+                    break;
+
+                case "o":
+
+                    switch (last2Char) {
+                        case "ao":
+                        case "eo":
+                        case "io":
+                        case "uo":
+                        case "oo":
+                        case "yo":
+                            break;
+                        default:
+                            append(0)
+                            break;
+                    }
+                    break;
+
+                case "y":
+
+                    switch (last2Char) {
+                        case "ay":
+                        case "ey":
+                        case "iy":
+                        case "oy":
+                        case "uy":
+                        case "yy":
+                            break;
+                        default:
+                            append(1)
+                            break;
+                    }
+                    break;
+
+                case "e":
+
+                    switch (last2Char) {
+                        case "fe":
+                            if (last3Char == "ffe") {
+                                break;
+                            }
+                            default:
+                                append(2)
+                                break;
+                    }
+                    break;
+
+                case "f":
+
+                    switch (last2Char){
+                        case "ff":
+                            break;
+                        default:
+                            append(3)
+                    }
+                    break;
+
+                default:
+                    append(4)
+
+            }
+
+
+
+            function append(num) {
+                display = document.getElementById("output")
+                input = document.getElementById("input").value
+                temp = ""
+                switch (num) {
+                    case 0:
+                        output = input.concat("es")
+                        display.value = output
+                        break;
+                    case 1:
+                        temp = input.slice(0, -1)
+                        output = temp.concat("ies")
+                        display.value = output
+                        break;
+                    case 2:
+                        temp = input.slice(0, -2)
+                        output = temp.concat("ves")
+                        display.value = output
+                        break;
+                    case 3:
+                        temp = input.slice(0, -1)
+                        output = temp.concat("ves")
+                        display.value = output
+                        break;
+                    case 4:
+                        output = input.concat("s")
+                        display.value = output
+                        break;
+
+                }
+            }
+        }
+    </script>
 
 </body>
+
 </html>
